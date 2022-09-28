@@ -1,6 +1,15 @@
 <html>
 <body>
-    <p>Hi there!</p>
-    <p>It works!</p>
+    <div>
+        <h1><a href="/">Prueba</a></h1>
+    </div>
+    
+    {% for gast in gastos_o %}
+        <div>
+            <p> fecha cobro: {{ gast.fecha_cobro }}</p>
+            <h2><a href="">{{ gast.titulo }}</a></h2>
+            <p>{{ gast.descripcion|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
 </body>
 </html>
