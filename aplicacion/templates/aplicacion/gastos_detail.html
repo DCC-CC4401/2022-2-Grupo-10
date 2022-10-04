@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if gastos.fecha_cobro %}
+            <div class="date">
+                {{ gastos.fecha_cobro }}
+            </div>
+        {% endif %}
+        <h2>{{ gastos.titulo }}</h2>
+        <p>{{ gastos.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
