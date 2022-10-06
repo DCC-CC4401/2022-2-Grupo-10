@@ -1,15 +1,13 @@
-<html>
-<body>
-    <div>
-        <h1><a href="/">Prueba</a></h1>
-    </div>
-    
-    {% for gast in gastos_o %}
-        <div>
-            <p> fecha cobro: {{ gast.fecha_cobro }}</p>
-            <h2><a href="">{{ gast.titulo }}</a></h2>
-            <p>{{ gast.descripcion|linebreaksbr }}</p>
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+{% for post in posts %}
+    <div class="post">
+        <div class="date">
+            {{ gasto.published_date }}
         </div>
-    {% endfor %}
-</body>
-</html>
+        <h2><a href="{% url 'gastos_detail' pk=post.pk %}">{{ gasto.titulo }}</a></h2>
+        <p>{{ gasto.comentario|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

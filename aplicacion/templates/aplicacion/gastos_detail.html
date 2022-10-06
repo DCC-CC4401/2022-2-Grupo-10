@@ -1,0 +1,13 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if gasto.published_date %}
+            <div class="date">
+                {{ gasto.published_date }}
+            </div>
+        {% endif %}
+        <h2>{{ gasto.title }}</h2>
+        <p>{{ gasto.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
