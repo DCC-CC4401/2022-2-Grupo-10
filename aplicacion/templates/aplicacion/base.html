@@ -1,17 +1,39 @@
 {% load static %}
 <html>
     <head>
-        <title>Django Girls blog</title>
+        <title>Finances</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'aplicacion/base.css' %}">
     </head>
     <body>
         <div class="page-header">
-            <a href="{% url 'gastos_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            <h1><a href="/">Django Girls Blog</a></h1>
+            <h1><a href="/">Finances cretive title</a></h1>
         </div>
+        <div>
+            <div id="container">
+                <ul id="menu">
+                  <li><a href="{% url 'gastos_new' %}">Nuevo gasto</a>
+                  <li><a href="#">Nuevo ingreso</a>
+
+                  </li>
+                  <li><a href="#">Estadísticas</a>
+                  </li>
+                  <li><a href="#">Sobre el proyecto</a>
+                    <ul>
+                      <li><a href="#">Como usar</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Support</a></li>
+                </ul>
+                </div>
+                
+
+        </div>
+        
+
+
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
