@@ -1,13 +1,11 @@
-{% extends 'blog/base.html' %}
+<div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
 
-{% block content %}
-    <div class="post">
-        {% if gastos.fecha_cobro %}
-            <div class="date">
-                {{ gastos.fecha_cobro }}
-            </div>
-        {% endif %}
-        <h2>{{ gastos.titulo }}</h2>
-        <p>{{ gastos.text|linebreaksbr }}</p>
+{% for post in Gastos %}
+    <div>
+        <p> publicado: {{ post.monto }}</p>
+        <h2><a href="">{{ post.titulo }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
     </div>
-{% endblock %}
+{% endfor %}

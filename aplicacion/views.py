@@ -9,7 +9,7 @@ from .forms import GastosForm
 
 # Create your views here.
 def gastos_list(request):
-    gastos_o = gastos.objects.filter(fecha_cobro=timezone.now()).order_by('fecha_cobro')
+    gastos_o = gastos.objects.all()
     return render(request, 'aplicacion/gastos_list.html', {'gastos_o' :gastos_o})
 
 
@@ -32,6 +32,6 @@ def gastos_new(request):
 
 
     else:
-        form = GastosForm ()
-    return render(request, 'aplicacion/gasto_formulario.html', {'form': form})
+        form = GastosForm()
+    return render(request, 'aplicacion/GastosForm.html', {'form': form})
 
