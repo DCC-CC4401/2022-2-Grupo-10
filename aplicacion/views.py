@@ -10,7 +10,7 @@ from .forms import GastosForm
 # Create your views here.
 def gastos_list(request):
     gastos_o = gastos.objects.all()
-    return render(request, 'aplicacion/gastos_list.html', {'gastos_o' :gastos_o})
+    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
 
 
 def gastos_detail(request, pk):
