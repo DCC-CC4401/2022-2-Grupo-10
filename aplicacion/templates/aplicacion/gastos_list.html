@@ -7,6 +7,7 @@
         <h1><a href="/">Prueba</a></h1>
     </div>
     {% block content %}
+    <div id='calendar'></div>
     {% for gast in gastos_o %}
     <div class="post">
         <div class="date">
@@ -15,6 +16,7 @@
         <h2><a href="">{{ gast.titulo }}</a></h2>
         <p>{{ gast.descripcion|linebreaksbr }}</p>
     </div>
+    
 {% endfor %}
 {% endblock %}
     
