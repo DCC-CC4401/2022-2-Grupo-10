@@ -106,8 +106,8 @@
                     text: 'Resumen Movimientos'
                 },
                 xAxis: {
-                    type: 'Mes',
-                    categories: ['Julio', 'Agosto','Septiembre', 'Octubre']
+                    categories: ['Julio', 'Agosto','Septiembre', 'Octubre'],
+                    title: {text: 'Mes'}
                 },
                 
                 yAxis: {
@@ -117,7 +117,62 @@
                     }
                 },
             });
-    
+        </script>
+
+        <script>
+        Highcharts.chart('container2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Resumen Gastos'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.percentage:.1f} %'
+                        // format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Gastos',
+                colorByPoint: true,
+                data: [{
+                    name: 'Cuentas',
+                    y: 42,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Otros',
+                    y: 8
+                },  {
+                    name: 'Dividendo',
+                    y: 16
+                }, {
+                    name: 'Entretención',
+                    y: 11
+                }, {
+                    name: 'Comida',
+                    y: 23
+                }]
+            }]
+        });
         </script>
     </body>
 </html>

@@ -4,16 +4,11 @@
 {% block content %}
 
 <br></br>
-<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-	<a class="dropdown-item" href="#">Action</a>
-	<a class="dropdown-item" href="#">Another action</a>
-	<div class="dropdown-divider"></div>
-	<a class="dropdown-item" href="#">Something else here</a>
-</div>
 <div id="graph-resumen">
 	<div id="container1"></div>
+	<div id="container2"></div>
 	<p class="highcharts-description">
-		Este gráfico está construido con ingresos y gastos no registrados en la base de datos (solo para visualizar)
+		Nota: Estos gráficos están construidos con ingresos y gastos no registrados en la base de datos (solo para visualizar)
 	</p>
 </div>
 	<div id="main-container">
@@ -21,7 +16,6 @@
 		<div>
 			<h1>Detalle Movimientos</h1>
 		</div>
-		
 		<div class="dropdown-resumen">
 			<label for="daterange">Mostrar: </label>
 			<select id="data-range" name="data-range" required>
@@ -30,11 +24,29 @@
 				<option value="3">Últimos 60 días </option>
 			</select><br>
 		</div>
-		<script>
-			var selected = document.getElementById('data-range').value;
-		</script>
 
-	
+	<!-- No hace lo que quiero pero esto debería ajustar la tabla según la opción -->
+	<script type="text/javascript"> 
+		var selected = document.getElementById('data-range').value; 
+		var gastos = "{{gastos1}}";
+		if (selected == 1){
+			gastos = "{{gastos1}}";
+		}
+		else if (selected == 2){
+			gastos = "{{gastos2}}";
+		}
+		else if (selected == 3){
+			gastos = "{{gastos3}}";
+		}
+	</script>
+
+<p id="gastos_o" style="display:none;"></p>
+<p id="sel" style="display:none;"></p>
+<script>
+	document.getElementById('gastos_o').innerHTML = gastos;
+	document.getElementById('sel').innerHTML = selected;
+</script>
+
 
 	<table id="table_resumen">
 		<thead>
@@ -51,40 +63,42 @@
 		{% endfor %}
 		</tbody>	
 	</table>	
-	</div>
-	<div>
-		<figure class="highcharts-figure">
-			<table id="datatable" style="display:none;">
-				<thead>
-					<tr>
-						<th></th>
-						<th>Gastos</th>
-						<th>Ingresos</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>Julio</th>
-						<td>104</td>
-						<td>401</td>
-					</tr>
-					<tr>
-						<th>Agosto</th>
-						<td>768</td>
-						<td>634</td>
-					</tr>
-					<tr>
-						<th>Septiembre</th>
-						<td>201</td>
-						<td>502</td>
-					</tr>
-					<tr>
-						<th>Octubre</th>
-						<td>372</td>
-						<td>1 035</td>
-					</tr>
-				</tbody>
-			</table>
-		</figure>
-		</div>
+</div>
+
+<div>
+<figure class="highcharts-figure">
+	<table id="datatable" style="display:none;">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Gastos</th>
+				<th>Ingresos</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Julio</th>
+				<td>104</td>
+				<td>401</td>
+			</tr>
+			<tr>
+				<th>Agosto</th>
+				<td>768</td>
+				<td>634</td>
+			</tr>
+			<tr>
+				<th>Septiembre</th>
+				<td>201</td>
+				<td>502</td>
+			</tr>
+			<tr>
+				<th>Octubre</th>
+				<td>372</td>
+				<td>1 035</td>
+			</tr>
+		</tbody>
+	</table>
+</figure>
+</div>
+	
 {% endblock %}
