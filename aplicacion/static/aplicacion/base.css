@@ -193,16 +193,6 @@ body {
   background: rgba(0,223,252,.02);
 }
 
-
-#main-container{
-  position: absolute;
-  /* display: flex; */
-	/* margin: 150px auto; */
-	/* width: 200px; */
-}
-/* #main-container .table-resumen{
-  flex: 0;
-} */
 .dropdown_resumen{
   background-color: blueviolet;
   color: cyan;

@@ -3,17 +3,19 @@
 
 {% block content %}
 
+<br></br>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
 	<a class="dropdown-item" href="#">Action</a>
 	<a class="dropdown-item" href="#">Another action</a>
 	<div class="dropdown-divider"></div>
 	<a class="dropdown-item" href="#">Something else here</a>
-  </div>
-
-  	<p class="highcharts-description">
+</div>
+<div id="graph-resumen">
+	<div id="container1"></div>
+	<p class="highcharts-description">
 		Este gráfico está construido con ingresos y gastos no registrados en la base de datos (solo para visualizar)
 	</p>
-	<div id="container"></div>
+</div>
 	<div id="main-container">
 		
 		<div>
@@ -48,69 +50,41 @@
 		</tr>
 		{% endfor %}
 		</tbody>	
-	</table>
-	
-	<figure class="highcharts-figure">
-		<table id="datatable" style="display:none;">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Gastos</th>
-					<th>Ingresos</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>Julio</th>
-					<td>104</td>
-					<td>401</td>
-				</tr>
-				<tr>
-					<th>Agosto</th>
-					<td>768</td>
-					<td>634</td>
-				</tr>
-				<tr>
-					<th>Septiembre</th>
-					<td>201</td>
-					<td>502</td>
-				</tr>
-				<tr>
-					<th>Octubre</th>
-					<td>372</td>
-					<td>1 035</td>
-				</tr>
-			</tbody>
-		</table>
-	</figure>
-	
+	</table>	
 	</div>
 	<div>
-		<script>
-			Highcharts.chart('container', {
-				data: {
-					table: 'datatable'
-				},
-				chart: {
-					type: 'column'
-				},
-				title: {
-					text: 'Resumen Movimientos'
-				},
-				xAxis: {
-					type: 'Mes',
-					categories: ['Julio', 'Agosto','Septiembre', 'Octubre']
-				},
-				
-				yAxis: {
-					allowDecimals: false,
-					title: {
-						text: 'Monto (clp)'
-					}
-				},
-			});
-	
-		</script>
-		
-	</div>
+		<figure class="highcharts-figure">
+			<table id="datatable" style="display:none;">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Gastos</th>
+						<th>Ingresos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Julio</th>
+						<td>104</td>
+						<td>401</td>
+					</tr>
+					<tr>
+						<th>Agosto</th>
+						<td>768</td>
+						<td>634</td>
+					</tr>
+					<tr>
+						<th>Septiembre</th>
+						<td>201</td>
+						<td>502</td>
+					</tr>
+					<tr>
+						<th>Octubre</th>
+						<td>372</td>
+						<td>1 035</td>
+					</tr>
+				</tbody>
+			</table>
+		</figure>
+		</div>
 {% endblock %}
