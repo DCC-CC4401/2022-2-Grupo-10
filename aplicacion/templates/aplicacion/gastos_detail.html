@@ -1,11 +1,45 @@
-<div>
-    <h1><a href="/">Django Girls Blog</a></h1>
-</div>
 
-{% for post in Gastos %}
-    <div>
-        <p> publicado: {{ post.monto }}</p>
-        <h2><a href="">{{ post.titulo }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
+
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+    <div class="post">
+        <h3>Información guardada: <h3>
+            <script>
+                swal("Felicidades!", "Los datos han sido guardado con éxito", "success");
+            </script>
+            
+
+
+        <table class="table table-bordered">
+            <tr>
+                <td><strong>Título :</strong></td>
+                <td>{{ gastos_a.titulo }}</td>
+              </tr>
+            <tr>
+                <td><strong>Fecha:</strong></td>
+                <td>{{ gastos_a.fecha_cobro }}</td>
+              </tr>
+            
+            <tr>
+              <td><strong>Recurrente:</strong></td>
+              <td>{{ gastos_a.recurrente }}</td>
+            </tr>
+            
+            <tr>
+              <td><strong>Prioridad:</strong></td>
+              <td>{{ gastos_a.prioridad }}</td>
+            </tr>
+            
+            <tr>
+              <td><strong>Categoría:</strong></td>
+              <td>{{ gastos_a.categoria }}</td>
+            </tr>
+            <tr>
+                <td><strong>Descripción:</strong> </td>
+                <td>{{ gastos_a.descripcion|linebreaksbr }}</td>
+              </tr>
+        </table>
+
     </div>
-{% endfor %}
+{% endblock %}
