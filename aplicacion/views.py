@@ -40,7 +40,7 @@ def gastos_new(request):
 def resumen(request):
     if request.method == 'GET':
         gastos_o = gastos.objects.all()
-        e = request.POST.get('data-range')
+        e = request.GET.get('data-range')
         final_date = timezone.now()
         init_date = timezone.now().date() - timedelta(days=7) #Default
         if (e == "1"):
