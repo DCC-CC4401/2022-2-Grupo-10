@@ -14,8 +14,8 @@ def gastos_list(request):
 
 
 def gastos_detail(request, pk):
-    gast = get_object_or_404(gastos, pk=pk)
-    return render(request, 'aplicacion/gastos_detail.html', {'gast': gast})
+    gastos_a = get_object_or_404(gastos, pk=pk)
+    return render(request, 'aplicacion/gastos_detail.html', {'gastos_a': gastos_a})
 
 
 

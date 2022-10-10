@@ -7,4 +7,5 @@ urlpatterns = [
     path('gastos/<int:pk>/', views.gastos_detail, name='gastos_detail'),
 
 
+
 ]
