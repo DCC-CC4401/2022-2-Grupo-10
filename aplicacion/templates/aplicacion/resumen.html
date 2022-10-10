@@ -1,0 +1,205 @@
+{% extends 'aplicacion/base.html' %}
+
+
+{% block content %}
+
+<br></br>
+<!-- <div id="graph-resumen">
+	<div id="container1" style="display:none;"></div>
+	<div id="container2" style="display:none;"></div>
+	<p class="highcharts-description" style="display:none;">
+		Nota: Estos gráficos están construidos con ingresos y gastos no registrados en la base de datos (solo para visualizar)
+	</p>
+</div> -->
+	<div id="main-container">
+		<div>
+			<h1>Detalle Movimientos</h1>
+		</div>
+		<div class="dropdown-resumen">
+			<label for="daterange">Mostrar: </label>
+			<select id="data-range" name="data-range" required>
+				<option value="1" selected>Últimos 7 días</option>
+				<option value="2">Últimos 30 días</option>
+				<option value="3">Últimos 60 días </option>
+			</select><br>
+		</div>
+
+	<!-- No hace lo que quiero pero esto debería ajustar la tabla según la opción -->
+	<script type="text/javascript"> 
+		var selected = document.getElementById('data-range').value; 
+		var gastos = "{{gastos1}}";
+		if (selected == 1){
+			gastos = "{{gastos1}}";
+		}
+		else if (selected == 2){
+			gastos = "{{gastos2}}";
+		}
+		else if (selected == 3){
+			gastos = "{{gastos3}}";
+		}
+	</script>
+
+<p id="gastos_o" style="display:none;"></p>
+<p id="sel" style="display:none;"></p>
+<script>
+	document.getElementById('gastos_o').innerHTML = gastos;
+	document.getElementById('sel').innerHTML = selected;
+</script>
+
+
+	<table class="table table-sm table-dark" id="table_resumen1">
+		<thead>
+			<tr>
+				<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for gast in gastos1 %}
+		<tr>
+			<td>{{ gast.titulo }}</td><td>{{gast.categoria}}</td><td>{{ gast.fecha_cobro}}</td><td>{{gast.monto}}
+			</td>
+		</tr>
+		{% endfor %}
+		</tbody>	
+	</table>	
+</div>
+</br>
+<div id="main-container2">
+		
+	<div class="dropdown-resumen">
+		<label for="daterange">Mostrar: </label>
+		<select id="data-range" name="data-range" required>
+			<option value="1">Últimos 7 días</option>
+			<option value="2" selected>Últimos 30 días</option>
+			<option value="3">Últimos 60 días </option>
+		</select><br>
+	</div>
+
+<!-- No hace lo que quiero pero esto debería ajustar la tabla según la opción -->
+<script type="text/javascript"> 
+	var selected = document.getElementById('data-range').value; 
+	var gastos = "{{gastos1}}";
+	if (selected == 1){
+		gastos = "{{gastos1}}";
+	}
+	else if (selected == 2){
+		gastos = "{{gastos2}}";
+	}
+	else if (selected == 3){
+		gastos = "{{gastos3}}";
+	}
+</script>
+
+<p id="gastos_o" style="display:none;"></p>
+<p id="sel" style="display:none;"></p>
+<script>
+document.getElementById('gastos_o').innerHTML = gastos;
+document.getElementById('sel').innerHTML = selected;
+</script>
+
+
+<table class="table table-sm table-dark" id="table_resumen2">
+	<thead>
+		<tr>
+			<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for gast in gastos2 %}
+	<tr>
+		<td>{{ gast.titulo }}</td><td>{{gast.categoria}}</td><td>{{ gast.fecha_cobro}}</td><td>{{gast.monto}}
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>	
+</table>	
+</div>
+</br>
+<div id="main-container3">
+		
+	<div class="dropdown-resumen">
+		<label for="daterange">Mostrar: </label>
+		<select id="data-range" name="data-range" required>
+			<option value="1">Últimos 7 días</option>
+			<option value="2">Últimos 30 días</option>
+			<option value="3" selected>Últimos 60 días </option>
+		</select><br>
+	</div>
+
+<!-- No hace lo que quiero pero esto debería ajustar la tabla según la opción -->
+<script type="text/javascript"> 
+	var selected = document.getElementById('data-range').value; 
+	var gastos = "{{gastos1}}";
+	if (selected == 1){
+		gastos = "{{gastos1}}";
+	}
+	else if (selected == 2){
+		gastos = "{{gastos2}}";
+	}
+	else if (selected == 3){
+		gastos = "{{gastos3}}";
+	}
+</script>
+
+<p id="gastos_o" style="display:none;"></p>
+<p id="sel" style="display:none;"></p>
+<script>
+document.getElementById('gastos_o').innerHTML = gastos;
+document.getElementById('sel').innerHTML = selected;
+</script>
+
+
+<table class="table table-sm table-dark" id="table_resumen3">
+	<thead>
+		<tr>
+			<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for gast in gastos3 %}
+	<tr>
+		<td>{{ gast.titulo }}</td><td>{{gast.categoria}}</td><td>{{ gast.fecha_cobro}}</td><td>{{gast.monto}}
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>	
+</table>	
+</div>
+
+<div>
+<figure class="highcharts-figure">
+	<table id="datatable" style="display:none;">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Gastos</th>
+				<th>Ingresos</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Julio</th>
+				<td>104</td>
+				<td>401</td>
+			</tr>
+			<tr>
+				<th>Agosto</th>
+				<td>768</td>
+				<td>634</td>
+			</tr>
+			<tr>
+				<th>Septiembre</th>
+				<td>201</td>
+				<td>502</td>
+			</tr>
+			<tr>
+				<th>Octubre</th>
+				<td>372</td>
+				<td>1 035</td>
+			</tr>
+		</tbody>
+	</table>
+</figure>
+</div>
+	
+{% endblock %}
