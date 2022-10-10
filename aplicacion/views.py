@@ -26,7 +26,6 @@ def gastos_new(request):
         if form.is_valid():
             gastos = form.save(commit=False)
             gastos.id_usuario = request.user
-            gastos.fecha_cobro = timezone.now()
             gastos.save()
             return redirect('gastos_detail', pk=gastos.pk)
 
