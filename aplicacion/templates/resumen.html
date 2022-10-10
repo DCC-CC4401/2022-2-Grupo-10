@@ -1,0 +1,49 @@
+{% extends 'aplicacion/base.html' %}
+
+
+{% block content %}
+
+<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+	<a class="dropdown-item" href="#">Action</a>
+	<a class="dropdown-item" href="#">Another action</a>
+	<div class="dropdown-divider"></div>
+	<a class="dropdown-item" href="#">Something else here</a>
+  </div>
+
+	<div id="main-container">
+		
+		<div>
+			<h1>Detalle Movimientos</h1>
+		</div>
+		
+		<div class="dropdown-resumen">
+			<label for="daterange">Mostrar: </label>
+			<select id="data-range" name="data-range" required>
+				<option value="1" selected>Últimos 7 días</option>
+				<option value="2">Últimos 30 días</option>
+				<option value="3">Últimos 60 días </option>
+			</select><br>
+		</div>
+		<script>
+			var selected = document.getElementById('data-range').value;
+		</script>
+		<div>
+
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
+				</tr>
+			</thead>
+			
+			{% for gast in gastos_o %}
+			<tr>
+				<td>{{ gast.titulo }}</td><td>{{gast.categoria}}</td><td>{{ gast.fecha_cobro}}</td><td>{{gast.monto}}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}
