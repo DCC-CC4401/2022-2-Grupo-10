@@ -42,7 +42,7 @@ def resumen(request):
         gastos_o = gastos.objects.all()
         e = request.GET.get('data-range')
         final_date = timezone.now()
-        init_date = timezone.now().date() - timedelta(days=7) #Default
+        init_date = timezone.now().date() - timedelta(days=30) #Default
         if (e == "1"):
             init_date = timezone.now().date() - timedelta(days=7)
         elif (e == "2"):

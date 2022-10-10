@@ -195,10 +195,14 @@ body {
 
 
 #main-container{
-	margin: 150px auto;
-	width: 200px;
+  position: absolute;
+  /* display: flex; */
+	/* margin: 150px auto; */
+	/* width: 200px; */
 }
-
+/* #main-container .table-resumen{
+  flex: 0;
+} */
 .dropdown_resumen{
   background-color: blueviolet;
   color: cyan;
@@ -224,7 +228,7 @@ td{
 }
 
 thead{
-	background-color:rgb(16, 90, 98);
+	background-color:rgb(16, 69, 98);
 	color: white;
 }
 
@@ -234,6 +238,6 @@ tr:nth-child(even){
 
 tr:hover td{
   border-right: #369681;
-	background-color: #5a988a;
+	background-color: #5a9498;
 	color: white;
-} 
+}
