@@ -19,7 +19,6 @@ def gastos_detail(request, pk):
     return render(request, 'aplicacion/gastos_detail.html', {'gastos_a': gastos_a})
 
 
-
 def gastos_new(request):
     form = GastosForm()
     if request.method == "POST":
