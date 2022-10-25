@@ -64,7 +64,7 @@ body {
 
 #container {
   position: relative;
-  width: 940px;   
+  width: auto; /*940px;    */
 }
 
 #container:after {
@@ -192,4 +192,3 @@ body {
   border-bottom: dotted 1px rgba(255,255,255,.15);
   background: rgba(0,223,252,.02);
 }
-
