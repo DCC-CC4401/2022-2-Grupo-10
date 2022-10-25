@@ -10,5 +10,8 @@ function selection(){
     else if (selected == 3){
         gastos = document.getElementById("table_resumen3");
     }
+    else if (selected == 4){
+        gastos = document.getElementById("resumen_anual");
+    }
     document.getElementById("table_resumen").innerHTML = gastos.outerHTML;
 }
