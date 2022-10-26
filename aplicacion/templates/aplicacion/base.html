@@ -8,12 +8,19 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'aplicacion/base.css' %}">
+        <link rel="stylesheet" href="{% static 'aplicacion/resumen.css' %}">
         <link href="{% static 'aplicacion/fullcalendar/lib/main.css' %}" rel='stylesheet' />
         <link href="{% static 'aplicacion/fullcalendar/lib/main.min.css' %}" rel='stylesheet' />
         <script src="{% static 'aplicacion/fullcalendar/lib/main.js' %}"></script>
-        <script src="{% static 'aplicacion/fullcalendar/lib/main.min.js' %}"></script>
         <script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
         <script>
     
             document.addEventListener('DOMContentLoaded', function() {
@@ -58,7 +65,7 @@
     </head>
     <body>
         <div class="page-header">
-            <h1><a href="/">Finances cretive title</a></h1>
+            <h1><a href="/">Finances creative title</a></h1>
         </div>
         <div>
             <div id="container">
@@ -67,7 +74,7 @@
                   <li><a href="#">Nuevo ingreso</a>
 
                   </li>
-                  <li><a href="#">Estadísticas</a>
+                  <li><a href="{% url 'resumen' %}">Resumen</a>
                   </li>
                   <li><a href="#">Sobre el proyecto</a>
                     <ul>
@@ -91,5 +98,114 @@
                 </div>
             </div>
         </div>
+
+        
+        <script>
+            var data1 = [{% for ctd in date_list %}{{ ctd }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+            var data2 = [{% for ctd2 in date_list_2 %}{{ ctd2 }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+        Highcharts.chart('containerr', {
+            chart: {
+                type: 'column',
+                backgroundColor:'#F8F9F9',
+                
+            },
+            title: {
+                text: 'Resumen Movimientos',
+                style: {
+                    fontFamily: 'Lobster'
+                }
+            },
+            xAxis: {
+                title: {
+                    useHTML: true,
+                    text: 'Mes'
+                },
+                categories: [
+                    {% for mes in name_d_list %}'{{mes}}'{% if not forloop.last %}, {% endif %}{% endfor %}
+                ]
+            },
+            yAxis: {
+                title: {
+                    useHTML: true,
+                    text: 'Monto (clp)'
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Gastos',
+                label: 'Gastos',
+                data: data1,
+                color: '#FFA000'
+            },
+            {
+                name: 'Ingresos',
+                label: 'Ingresos',
+                data: data2,
+                color: '#7CB342'
+            }]
+        });
+        </script>
+        
+        
+        <script>
+            var nombres = [{% for cat in cat_list %}'{{cat}}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+            var valores2 = [{% for number in number_list %}'{{ number }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+            var valores = [];
+            for (let i=0; i<valores2.length; i++){
+                valores.push(parseInt(valores2[i]));
+            }
+            dataa = [];
+            for (let i=0; i<nombres.length; i++){
+                dataa.push({name: nombres[i], y: valores[i]});
+            }
+            
+            Highcharts.chart('pie', {
+                chart: {
+                    plotBackgroundColor: true,
+                    backgroundColor:'#F8F9F9',
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Resumen Gastos por Categoría',
+                    style: {
+                        fontFamily: 'Lobster'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Porcentaje',
+                    colorByPoint: true,
+                    data: dataa,
+                }]
+            });
+            </script>
+
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script src="{% static 'aplicacion/resumen/table.js' %}"></script>
     </body>
 </html>

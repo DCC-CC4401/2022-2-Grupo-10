@@ -64,7 +64,7 @@ body {
 
 #container {
   position: relative;
-  width: 940px;   
+  width: auto; /*940px;    */
 }
 
 #container:after {
