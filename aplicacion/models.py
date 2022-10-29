@@ -46,6 +46,7 @@ class Ingresos(models.Model):
         ('Si', 'Si'),
         ('No', 'No'),
     ]
+    
     recurrente = models.CharField(max_length=2, choices=RECURRENCIA)
     fecha_ingreso = models.DateField()
     monto = models.IntegerField()
