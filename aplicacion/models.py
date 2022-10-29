@@ -50,15 +50,6 @@ class Ingresos(models.Model):
     recurrente = models.CharField(max_length=2, choices=RECURRENCIA)
     fecha_ingreso = models.DateField()
     monto = models.IntegerField()
-    CATEGORIA = [
-        ('Entretención', 'Entretención'),
-        ('Transporte', 'Transporte'),
-        ('Alimento', 'Alimentos'),
-        ('Cuentas Básicas', 'Cuentas Básicas'),
-        ('Dividendo', 'Dividendo'),
-        ('Otros', 'Otros'),
-    ]
-    categoria = models.CharField(max_length=100, choices=CATEGORIA)
 
     def __str__(self):
         return self.titulo
