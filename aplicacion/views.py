@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render
 from django.utils import timezone
 from datetime import timedelta
-from .models import gastos
+from .models import Ingresos, gastos
 # from django.contrib.auth.decorators import login_required
 from .forms import GastosForm
 
@@ -92,10 +92,10 @@ def bar_chart_resumen():
         ###########################################################
         # Lo mismo pero para ingresos
         ###########################################################
-        ingresos =gastos.objects.filter(fecha_cobro__year__gte=year, # Luego gastos se reemplazará por ingresos
-                                fecha_cobro__month__gte=filter_month,
-                              fecha_cobro__year__lte=year,
-                              fecha_cobro__month__lte=filter_month) 
+        ingresos =Ingresos.objects.filter(fecha_ingreso__year__gte=year, # Luego gastos se reemplazará por ingresos
+                                fecha_ingreso__month__gte=filter_month,
+                              fecha_ingreso__year__lte=year,
+                              fecha_ingreso__month__lte=filter_month) 
         total2 = 0
         for i in range(len(ingresos)):
             total2+=ingresos[i].monto
@@ -115,12 +115,12 @@ def bar_chart_resumen():
         total+=gastos2[i].monto
     date_list.append(total)
     
-    ingresos =gastos.objects.filter(fecha_cobro__year__gte=year, # Luego gastos se reemplazará por ingresos
-                                fecha_cobro__month__gte=filter_month,
-                                fecha_cobro__day__gte=1,
-                              fecha_cobro__year__lte=year,
-                              fecha_cobro__month__lte=filter_month,
-                              fecha_cobro__day__lte = today) 
+    ingresos =Ingresos.objects.filter(fecha_ingreso__year__gte=year, # Luego gastos se reemplazará por ingresos
+                                fecha_ingreso__month__gte=filter_month,
+                                fecha_ingreso__day__gte=1,
+                              fecha_ingreso__year__lte=year,
+                              fecha_ingreso__month__lte=filter_month,
+                              fecha_ingreso__day__lte = today) 
     total2 = 0
     for i in range(len(ingresos)):
         total2+=ingresos[i].monto

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<!-- <br></br> -->
+<!-- TABLAS -->
 
 <div class="parent">
 	<div class="child0">
@@ -11,16 +11,17 @@
 			<h1><u>Detalle Movimientos</u></h1>
 		</div>
 		<div>
-			<label for="daterange">Mostrar: </label>
+			<label for="date-range">Mostrar: </label>
 			<select id="data-range" onchange="selection();">
 				<option value="1">Últimos 7 días</option>
 				<option value="2" selected>Últimos 30 días</option>
 				<option value="3">Últimos 60 días </option>
 				<option value="4">Este año</option>
-			</select><br>
+			</select>
+			
 		</div>
 
-<table id="table_resumen1" style="display:none;">
+<table class="table-sortable" id="table_resumen1" style="display:none;">
 	<thead>
 		<tr>
 			<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
@@ -34,7 +35,7 @@
 	{% endfor %}
 </table>	
 
-<table id="table_resumen2" style="display:none;">
+<table class="table-sortable" id="table_resumen2" style="display:none;">
 	<thead>
 		<tr>
 			<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
@@ -48,7 +49,7 @@
 	{% endfor %}
 </table>	
 
-<table id="table_resumen3" style="display:none;">
+<table class="table-sortable" id="table_resumen3" style="display:none;">
 	<thead>
 		<tr>
 			<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
@@ -62,7 +63,7 @@
 	{% endfor %}
 </table>
 
-<table id="resumen_anual" style="display:none;">
+<table class="table-sortable" id="resumen_anual" style="display:none;">
 	<thead>
 		<tr>
 			<th>Descripción</th><th>Categoría</th><th>Fecha</th><th>Costo</th>
@@ -76,25 +77,14 @@
 	{% endfor %}
 </table>	
 
-
-<!-- <table id="gastos1" style="display:none;"></table>
-<table id="gastos2" style="display:none;"></table>
-<table id="gastos3" style="display:none;"></table>
-<table id="gasto_anual" style="display:none;"></table> -->
-<!-- <p id="sel" style="display:none;"></p> -->
-
-
 <div class="center_table">
-	<table id="table_resumen"> </table>
+	<table class="table-sortable" id="table_resumen"> </table>
 </div>
 
 <script>
 	document.getElementById('table_resumen').innerHTML = document.getElementById('table_resumen2').innerHTML;
-	// document.getElementById('gastos1').innerHTML = "{{gastos1}}";
-	// document.getElementById('gastos2').innerHTML = "{{gastos2}}";
-	// document.getElementById('gastos3').innerHTML = "{{gastos3}}";
-	// document.getElementById('gasto_anual').innerHTML = "{{gasto_anual}}";
 </script>
+
 </div>
 	</div>
 	<div class="parent2" float="right;">
@@ -109,8 +99,9 @@
 </div>
 
 <script>graphs()</script>
-
 </div>
+
+
 
 <!-- GRÁFICOS -->
 
@@ -218,7 +209,5 @@ Highcharts.chart('containerr', {
 		}]
 	});
 	</script>
-
-
-
+	
 {% endblock %}
