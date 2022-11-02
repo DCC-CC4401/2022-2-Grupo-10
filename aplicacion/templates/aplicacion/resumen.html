@@ -101,8 +101,6 @@
 <script>graphs()</script>
 </div>
 
-
-
 <!-- GRÁFICOS -->
 
 <script>
@@ -181,9 +179,9 @@ Highcharts.chart('containerr', {
 				fontFamily: 'Lobster'
 			}
 		},
-		tooltip: {
-			pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-		},
+		// tooltip: {
+		// 	pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		// },
 		accessibility: {
 			point: {
 				valueSuffix: '%'
@@ -203,7 +201,7 @@ Highcharts.chart('containerr', {
 			}
 		},
 		series: [{
-			name: 'Porcentaje',
+			name: 'Total',
 			colorByPoint: true,
 			data: dataa,
 		}]

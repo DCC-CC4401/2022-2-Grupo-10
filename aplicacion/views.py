@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from datetime import timedelta
 from .models import Ingresos, gastos
+from django.db.models import Sum
 # from django.contrib.auth.decorators import login_required
 from .forms import GastosForm
 
@@ -46,23 +47,21 @@ def filtro_tablas():
     init_date_3 = timezone.now().date() - timedelta(days=60)
 
     year = final_date.year
-    month = final_date.month
-    day = final_date.day
 
     gastos1 = gastos.objects.order_by('fecha_cobro').filter(fecha_cobro__range=[init_date_1, final_date]) #Tabla opción 1
     gastos2 = gastos.objects.order_by('fecha_cobro').filter(fecha_cobro__range=[init_date_2, final_date]) #Tabla opción 2
     gastos3 = gastos.objects.order_by('fecha_cobro').filter(fecha_cobro__range=[init_date_3, final_date]) #Tabla opción 3
     gastoanual = gastos.objects.order_by('fecha_cobro').filter(fecha_cobro__year__gte=year, fecha_cobro__month__gte=1, fecha_cobro__day__gte=1, 
-                fecha_cobro__year__lte=year, fecha_cobro__month__lte=month, fecha_cobro__day__lte=day) # Tabla opción 4
+                fecha_cobro__lte=final_date) # Tabla opción 4
     return (gastos1, gastos2, gastos3, gastoanual)
 
 def pie_chart_resumen():
-    sum_ent = int(gastos.objects.filter(categoria='Entretención').count())
-    sum_tr = int(gastos.objects.filter(categoria='Transporte').count())
-    sum_al = int(gastos.objects.filter(categoria='Alimento').count())
-    sum_cb = int(gastos.objects.filter(categoria='Cuentas Básicas').count())
-    sum_div = int(gastos.objects.filter(categoria='Dividendo').count())
-    sum_ot = int(gastos.objects.filter(categoria='Otros').count())
+    sum_ent = gastos.objects.filter(categoria='Entretención').aggregate(Sum('monto'))['monto__sum']
+    sum_tr = gastos.objects.filter(categoria='Transporte').aggregate(Sum('monto'))['monto__sum']
+    sum_al = gastos.objects.filter(categoria='Alimento').aggregate(Sum('monto'))['monto__sum']
+    sum_cb = gastos.objects.filter(categoria='Cuentas Básicas').aggregate(Sum('monto'))['monto__sum']
+    sum_div = gastos.objects.filter(categoria='Dividendo').aggregate(Sum('monto'))['monto__sum']
+    sum_ot = gastos.objects.filter(categoria='Otros').aggregate(Sum('monto'))['monto__sum']
 
     cat_list = ['Entretención', 'Transporte', 'Alimento', 'Cuentas Básicas', 'Dividendo', 'Otros']
     number_list = [sum_ent, sum_tr, sum_al, sum_cb, sum_div, sum_ot]
