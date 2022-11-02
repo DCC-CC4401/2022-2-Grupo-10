@@ -1,4 +1,4 @@
-function selection(){
+function selection_gastos(){
     var selected = parseInt(document.getElementById("data-range").value); 
     var gastos;
     if (selected == 1){
@@ -14,6 +14,33 @@ function selection(){
         gastos = document.getElementById("resumen_anual");
     }
     document.getElementById("table_resumen").innerHTML = gastos.outerHTML;
+    document.querySelectorAll(".table-sortable th").forEach(headerCell => {
+        headerCell.addEventListener("click", () => {
+            const tableElement = headerCell.parentElement.parentElement.parentElement;
+            const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+            const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+    
+            sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+        });
+    });
+}
+
+function selection_ingresos(){
+    var selected = parseInt(document.getElementById("data-range2").value); 
+    var ingresos;
+    if (selected == 1){
+        ingresos = document.getElementById("table_ingresos1");
+    }
+    else if (selected == 2){
+        ingresos = document.getElementById("table_ingresos2");
+    }
+    else if (selected == 3){
+        ingresos = document.getElementById("table_ingresos3");
+    }
+    else if (selected == 4){
+        ingresos = document.getElementById("resumen_anual_ingresos");
+    }
+    document.getElementById("table_resumen_ingresos").innerHTML = ingresos.outerHTML;
     document.querySelectorAll(".table-sortable th").forEach(headerCell => {
         headerCell.addEventListener("click", () => {
             const tableElement = headerCell.parentElement.parentElement.parentElement;

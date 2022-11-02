@@ -43,7 +43,7 @@
 }
 
 .parent2{
-  float: right;
+  display: flex;
 }
 
 .child0{
@@ -52,16 +52,17 @@
 }
 
 .child1{
+  margin-left: 2%;
   margin-bottom: 5%;
 }
-
 .child2{
+  margin-left: 5%;
   margin-bottom: 5%;
 }
 
 div#titulo_tabla{
   width: max-content;
-  margin-bottom: 10%;
+  /* margin-bottom: 10%; */
 }
 
 .center_table{
@@ -69,6 +70,7 @@ div#titulo_tabla{
   margin-right: auto;
 }
 
+/* Tabla orden */
 
 .table-sortable th {
 	cursor: pointer;
