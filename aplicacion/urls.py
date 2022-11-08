@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.gastos_list, name='gastos_list'),
     path('gastos/new', views.gastos_new, name='gastos_new'),
     path('gastos/<int:pk>/', views.gastos_detail, name='gastos_detail'),
-    path('gastos/resumen/', views.resumen, name='resumen'),
+    path('/resumen/', views.resumen, name='resumen'),
 
 
 
