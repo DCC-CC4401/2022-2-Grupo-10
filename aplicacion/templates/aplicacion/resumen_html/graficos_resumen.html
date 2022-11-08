@@ -1,0 +1,106 @@
+<!-- GRÁFICOS -->
+
+<script>
+	var data1 = [{% for ctd in date_list %}{{ ctd }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+	var data2 = [{% for ctd2 in date_list_2 %}{{ ctd2 }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+Highcharts.chart('containerr', {
+	chart: {
+		type: 'column',
+		backgroundColor:'#F8F9F9',
+		
+	},
+	title: {
+		text: 'Resumen Movimientos',
+		style: {
+			fontFamily: 'Lobster'
+		}
+	},
+	xAxis: {
+		title: {
+			useHTML: true,
+			text: 'Mes'
+		},
+		categories: [
+			{% for mes in name_d_list %}'{{mes}}'{% if not forloop.last %}, {% endif %}{% endfor %}
+		]
+	},
+	yAxis: {
+		title: {
+			useHTML: true,
+			text: 'Monto (clp)'
+		}
+	},
+	credits: {
+		enabled: false
+	},
+	series: [{
+		name: 'Gastos',
+		label: 'Gastos',
+		data: data1,
+		color: '#FFA000'
+	},
+	{
+		name: 'Ingresos',
+		label: 'Ingresos',
+		data: data2,
+		color: '#7CB342'
+	}]
+});
+</script>
+
+
+<script>
+	var nombres = [{% for cat in cat_list %}'{{cat}}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+	var valores2 = [{% for number in number_list %}'{{ number }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+	var valores = [];
+	for (let i=0; i<valores2.length; i++){
+		valores.push(parseInt(valores2[i]));
+	}
+	dataa = [];
+	for (let i=0; i<nombres.length; i++){
+		dataa.push({name: nombres[i], y: valores[i]});
+	}
+	
+	Highcharts.chart('pie', {
+		chart: {
+			plotBackgroundColor: true,
+			backgroundColor:'#F8F9F9',
+			plotBorderWidth: null,
+			plotShadow: false,
+			type: 'pie'
+		},
+		title: {
+			text: 'Resumen Gastos por Categoría',
+			style: {
+				fontFamily: 'Lobster'
+			}
+		},
+		// tooltip: {
+		// 	pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		// },
+		accessibility: {
+			point: {
+				valueSuffix: '%'
+			}
+		},
+		credits: {
+			enabled: false
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+				}
+			}
+		},
+		series: [{
+			name: 'Total',
+			colorByPoint: true,
+			data: dataa,
+		}]
+	});
+	</script>

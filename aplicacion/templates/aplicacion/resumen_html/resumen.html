@@ -1,0 +1,79 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+
+<br></br>
+<div class="parent2">
+	<br></br>
+	<br></br>
+	<div class="child1">
+		<div id = "containerr"></div>
+	</div>
+	<div class="child2">
+		<div id = "pie"></div>
+	</div>
+</div>
+
+<!-- TABLAS -->
+<div class="parent2">
+	<div class="child0">
+	<div id="main-container">
+		<div id="titulo_tabla">
+			<h1><u>Detalle Gastos</u></h1>
+		</div>
+		<div>
+			<label for="date-range">Mostrar: </label>
+			<select id="data-range" onchange="selection_gastos();">
+				<option value="1">Últimos 7 días</option>
+				<option value="2" selected>Últimos 30 días</option>
+				<option value="3">Últimos 60 días </option>
+				<option value="4">Este año</option>
+			</select>
+			
+		</div>
+
+	{% include 'aplicacion/resumen_html/tablas_gastos.html'%}
+
+	<div class="center_table">
+		<table class="table-sortable" id="table_resumen"> </table>
+	</div>
+
+	<script>
+		document.getElementById('table_resumen').innerHTML = document.getElementById('table_resumen2').innerHTML;
+	</script>
+</div>
+</div>
+
+	<div id="main-container">
+		<div id="titulo_tabla">
+			<h1><u>Detalle Ingresos</u></h1>
+		</div>
+		<div>
+			<label for="date-range">Mostrar: </label>
+			<select id="data-range2" onchange="selection_ingresos();">
+				<option value="1">Últimos 7 días</option>
+				<option value="2" selected>Últimos 30 días</option>
+				<option value="3">Últimos 60 días </option>
+				<option value="4">Este año</option>
+			</select>
+			
+		</div>
+
+	{% include 'aplicacion/resumen_html/tablas_ingresos.html'%}
+
+	<div class="center_table">
+		<table class="table-sortable" id="table_resumen_ingresos"> </table>
+	</div>
+
+	<script>
+		document.getElementById('table_resumen_ingresos').innerHTML = document.getElementById('table_ingresos2').innerHTML;
+	</script>
+</div>
+
+{% include 'aplicacion/resumen_html/graficos_resumen.html' %}
+<script>graphs()</script>
+</div>
+	
+
+
+{% endblock %}

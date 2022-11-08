@@ -1,0 +1,55 @@
+<table class="table-sortable" id="table_ingresos1" style="display:none;">
+	<thead>
+		<tr>
+			<th>Descripción</th><th>Fecha</th><th>Costo</th>
+		</tr>
+	</thead>
+	{% for gast in ingresos1 %}
+	<tr>
+		<td>{{ gast.titulo }}</td><td>{{ gast.fecha_ingreso}}</td><td>{{gast.monto}}
+		</td>
+	</tr>
+	{% endfor %}
+</table>	
+
+<table class="table-sortable" id="table_ingresos2" style="display:none;">
+	<thead>
+		<tr>
+			<th>Descripción</th><th>Fecha</th><th>Costo</th>
+		</tr>
+	</thead>
+	{% for gast in ingresos2 %}
+	<tr>
+		<td>{{ gast.titulo }}</td><td>{{ gast.fecha_ingreso}}</td><td>{{gast.monto}}
+		</td>
+	</tr>
+	{% endfor %}
+</table>	
+
+<table class="table-sortable" id="table_ingresos3" style="display:none;">
+	<thead>
+		<tr>
+			<th>Descripción</th><th>Fecha</th><th>Costo</th>
+		</tr>
+	</thead>
+	{% for gast in ingresos3 %}
+	<tr>
+		<td>{{ gast.titulo }}</td><td>{{ gast.fecha_ingreso}}</td><td>{{gast.monto}}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<table class="table-sortable" id="resumen_anual_ingresos" style="display:none;">
+	<thead>
+		<tr>
+			<th>Descripción</th><th>Fecha</th><th>Costo</th>
+		</tr>
+	</thead>
+	{% for gast in ingresoanual %}
+	<tr>
+		<td>{{ gast.titulo }}</td><td>{{ gast.fecha_ingreso}}</td><td>{{gast.monto}}
+		</td>
+	</tr>
+	{% endfor %}
+</table>	
