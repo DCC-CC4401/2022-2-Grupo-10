@@ -1,0 +1,34 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+    <div class="post">
+        <h3>Información guardada: <h3>
+            <script>
+                swal("Felicidades!", "Los datos han sido guardado con éxito", "success");
+            </script>
+            
+
+
+        <table class="table table-bordered">
+            <tr>
+                <td><strong>Título :</strong></td>
+                <td>{{ ingresos_a.titulo }}</td>
+              </tr>
+            <tr>
+                <td><strong>Fecha:</strong></td>
+                <td>{{ ingresos_a.fecha_cobro }}</td>
+              </tr>
+            
+            <tr>
+              <td><strong>Recurrente:</strong></td>
+              <td>{{ ingresos_a.recurrente }}</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Descripción:</strong> </td>
+                <td>{{ ingresos_a.descripcion|linebreaksbr }}</td>
+              </tr>
+        </table>
+
+    </div>
+{% endblock %}

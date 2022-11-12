@@ -1,0 +1,22 @@
+{% extends 'aplicacion/base.html' %}
+
+<html>
+<body>
+    <div>
+        <h1><a href="/">Prueba</a></h1>
+    </div>
+    {% block content %}
+    {% for ingre in ingresos_o %}
+    <div class="post">
+        <div class="date">
+            {{ ingre.fecha_cobro }}
+        </div>
+        <h2><a href="">{{ ingre.titulo }}</a></h2>
+        <p>{{ ingre.descripcion|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+{% endblock %}
+    
+    
+</body>
+</html>

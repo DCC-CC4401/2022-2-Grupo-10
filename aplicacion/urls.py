@@ -7,6 +7,11 @@ urlpatterns = [
     path('gastos/<int:pk>/', views.gastos_detail, name='gastos_detail'),
     path('resumen/', views.resumen, name='resumen'),
 
+    ##############################################
+    ############ path para ingresos ##############
 
+    path('', views.ingresos_list, name='ingresos_list'),
+    path('ingresos/new', views.ingresos_new, name='ingresos_new'),
+    path('ingresos/<int:pk>/', views.ingresos_detail, name='ingresos_detail'),
 
 ]

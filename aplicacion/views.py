@@ -35,6 +35,31 @@ def gastos_new(request):
         form = GastosForm()
     return render(request, 'aplicacion/GastosForm.html', {'form': form})
 
+###Ingresos###
+def ingresos_list(request):
+    ingresos_o = ingresos.objects.all()
+    return render(request, 'aplicacion/inicio.html', {'ingresos_o' :ingresos_o})
+
+
+def ingresos_detail(request, pk):
+    ingresos_a = get_object_or_404(ingresos, pk=pk)
+    return render(request, 'aplicacion/ingresos_detail.html', {'ingresos_a': ingresos_a})
+
+
+def ingresos_new(request):
+    form = IngresosForm()
+    if request.method == "POST":
+        form = IngresosForm(request.POST)
+        if form.is_valid():
+            ingresos = form.save(commit=False)
+            ingresos.id_usuario = request.user
+            ingresos.save()
+            return redirect('gastos_detail', pk=ingresos.pk)
+
+
+    else:
+        form = IngresosForm()
+    return render(request, 'aplicacion/IngresosForm.html', {'form': form})
 
 ################################################################
 # Resumen general (funcionando)
