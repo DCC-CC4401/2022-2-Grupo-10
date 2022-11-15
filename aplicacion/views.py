@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render
 from django.utils import timezone
+from django.contrib import messages
 from datetime import timedelta
 from .models import Ingresos, gastos
 from django.db.models import Sum
@@ -10,6 +11,20 @@ from .forms import GastosForm, IngresosForm
 
 
 # Create your views here.
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            for msg in form.error_messages:
+                messages.error(request, form.error_messages[msg])    
+    else:
+        form = RegisterForm()
+
+    return render(request, 'aplicacion/registro.html', {'form':form})
+
 def gastos_list(request):
     gastos_o = gastos.objects.all()
     return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
