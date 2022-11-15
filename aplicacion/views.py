@@ -6,7 +6,7 @@ from datetime import timedelta
 from .models import Ingresos, gastos
 from django.db.models import Sum
 # from django.contrib.auth.decorators import login_required
-from .forms import GastosForm
+from .forms import GastosForm, IngresosForm
 
 
 # Create your views here.
@@ -42,7 +42,7 @@ def ingresos_list(request):
 
 
 def ingresos_detail(request, pk):
-    ingresos_a = get_object_or_404(ingresos, pk=pk)
+    ingresos_a = get_object_or_404(Ingresos, pk=pk)
     return render(request, 'aplicacion/ingresos_detail.html', {'ingresos_a': ingresos_a})
 
 
@@ -54,7 +54,7 @@ def ingresos_new(request):
             ingresos = form.save(commit=False)
             ingresos.id_usuario = request.user
             ingresos.save()
-            return redirect('gastos_detail', pk=ingresos.pk)
+            return redirect('ingresos_detail', pk=ingresos.pk)
 
 
     else:
