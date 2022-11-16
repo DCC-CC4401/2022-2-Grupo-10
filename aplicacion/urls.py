@@ -11,5 +11,6 @@ urlpatterns = [
     path('', views.ingresos_list, name='ingresos_list'),
     path('ingresos/new', views.ingresos_new, name='ingresos_new'),
     path('ingresos/<int:pk>/', views.ingresos_detail, name='ingresos_detail'),
+    path('register/', views.register, name='register'),
 
 ]
