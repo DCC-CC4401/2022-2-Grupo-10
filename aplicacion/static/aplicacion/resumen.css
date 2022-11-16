@@ -11,7 +11,6 @@
 	background-color: white;
 	text-align: left;
 	border-collapse: collapse;
-	/* width: 75%; */
 }
 
 #main-container th{
@@ -44,7 +43,7 @@
 }
 
 .parent2{
-  float: right;
+  display: flex;
 }
 
 .child0{
@@ -53,19 +52,44 @@
 }
 
 .child1{
+  margin-left: 2%;
   margin-bottom: 5%;
 }
-
 .child2{
+  margin-left: 5%;
   margin-bottom: 5%;
 }
 
 div#titulo_tabla{
   width: max-content;
-  margin-bottom: 10%;
+  /* margin-bottom: 10%; */
 }
 
 .center_table{
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Tabla orden */
+
+.table-sortable th {
+	cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+	content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+	content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+	margin-left: 5px;
+}
+
+.table-sortable .th-sort-asc,
+.table-sortable .th-sort-desc {
+	background: rgba(0, 0, 0, 0.1);
 }
