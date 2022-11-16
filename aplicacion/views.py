@@ -7,7 +7,7 @@ from datetime import timedelta
 from .models import Ingresos, gastos
 from django.db.models import Sum
 # from django.contrib.auth.decorators import login_required
-from .forms import GastosForm, IngresosForm
+from .forms import GastosForm, IngresosForm, RegisterForm
 
 
 # Create your views here.
@@ -193,3 +193,6 @@ def resumen(request):
                         'cat_list': cat_list, 'number_list': number_list, 
                         'name_d_list': name_d_list, 'date_list': date_list, 'date_list_2': date_list_2}
         return render(request, 'aplicacion/resumen_html/resumen.html', diccionario)
+
+
+
