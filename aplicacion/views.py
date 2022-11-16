@@ -25,7 +25,7 @@ def register(request):
 
     return render(request, 'aplicacion/registro.html', {'form':form})
 
-def gastos_list(request):
+def inicio_calendario(request):
     gastos_o = gastos.objects.all()
     return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
 
