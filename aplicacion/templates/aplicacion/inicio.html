@@ -73,15 +73,30 @@
     </head>
     <body>
         <div class="page-header">
-            <h1><a href="calendario">¡Arregla tus Finanzas!</a></h1>
+            <h1><a href="calendario/">¡Arregla tus Finanzas!</a></h1>
         </div>
+
+        <div style="text-align: right; margin-right: 100px; color:black;">
+        
+            {% if user.is_authenticated %}
+    
+                Hola {{ user.username }} &nbsp; &nbsp; <a href="{% url 'logout_user' %}">Cerrar sesion</a>
+    
+            {% else %}
+    
+                <a href="{% url 'login_user'%}">Login</a> &nbsp; &nbsp; <a href="{% url 'register'%}">Register</a>
+            
+            {% endif %}
+    
+        </div>
+
         <div>
             <div id="container">
                 <ul id="menu">
-                    <li> <a href="{% url 'calendario' %}"> Calendario </a>
+                <li> <a href="{% url 'calendario' %}"> Calendario </a>
                   <li><a href="{% url 'gastos_new' %}">Nuevo gasto</a>
                   <li><a href="{% url 'ingresos_new' %}">Nuevo ingreso</a>
-
+                    
                   </li>
                   <li><a href="{% url 'resumen' %}">Resumen</a>
                   </li>
@@ -93,6 +108,8 @@
                   <li><a href="#">Support</a></li>
                 </ul>
                 </div>
+                
+
         </div>
         
 

@@ -37,7 +37,7 @@ def login_user(request):
             usuario = authenticate(username=nombre_usuario, password=contraseña)
             if usuario is not None:
                 login(request, usuario)
-                return redirect('/')
+                return redirect('calendario')
             else:
                 messages.error(request, "usuario no válido")    
         else:
