@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>¡Arregla tus Finanzas!</title>  
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'aplicacion/index.css' %}"> 
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="#page-top"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Colaboradores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-4 text-center"><br><br><br>
+                <h1 class="fw-bolder">Bienvenido a ¡Arregla tus Finanzas!</h1><br>
+                <p class="lead">Arregla tus finanzas con esta aplicación web.</p><br>
+                <!--Botones para ingresar y registrarse-->
+                <a class="btn btn-primary" href="#" role="button">Registrate</a>
+                <a class="btn btn-secondary" href="#" role="button">Ingresa</a><br><br>
+                <a class="btn btn-lg btn-light" href="#about">Conócenos</a>
+                <br><br><br><br><br>
+            </div>
+        </header>
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Acerca de</h2>
+                        <p class="lead">Esta app fue hecha con el propósito de ayudar al usuario a tener una interfaz en la que puede tener un seguimiento
+                            de sus finanzas y como estas se distribuyen en el mes, además de tener una visualización a través de gráficos y tablas de como estas se comportan.
+                            En esta app el usuario podrá:
+                        </p>
+                        <ul>
+                            <li>Crear un usuario personalizado que contendra tus ingresos/gastos del mes</li>
+                            <li>Agregar ingresos que tengas en el mes</li>
+                            <li>Agregar los gastos que tengas en el mes</li>
+                            <li>Tener representacion visual que muestre ingresos/gastos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services section-->
+        <section class="bg-light" id="services">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8"><br><br><br>
+                        <h2>Colaboradores</h2><br>
+                        <li>Dante Carcamo</li>
+                        <li>Darío Balart</li>
+                        <li>Paula Cabrera</li>
+                        <li>Valeria Burgos</li>
+                        <li>Vicente Gatica</li>
+                    </div><br><br><br><br>
+                </div>
+            </div>
+        </section>
+        <!-- Contact section-->
+        <section id="contact">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Contactanos</h2>
+                        <p class="lead"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Página creada para el ramo CC4401 Ingeniería de Software </p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'aplicacion/scripts.js' %}"></script> 
+    </body>
+</html>
