@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import gastos, Ingresos
+from .models import gastos, ingresos
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -21,5 +21,5 @@ class GastosForm(forms.ModelForm):
 class IngresosForm(forms.ModelForm):
 
     class Meta:
-        model = Ingresos
+        model = ingresos
         fields = ('titulo', 'descripcion', 'recurrente', 'fecha_ingreso', 'monto')

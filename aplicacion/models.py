@@ -38,7 +38,7 @@ class gastos(models.Model):
     class Meta:
         ordering = ["fecha_cobro"]
 
-class Ingresos(models.Model):
+class ingresos(models.Model):
     id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=20)
     descripcion = models.TextField(blank=True, null=True)

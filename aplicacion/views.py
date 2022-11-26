@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.contrib import messages
 from datetime import timedelta
-from .models import Ingresos, gastos
+from .models import ingresos, gastos
 from django.db.models import Sum
 # from django.contrib.auth.decorators import login_required
 from .forms import GastosForm, IngresosForm, RegisterForm
@@ -27,7 +27,8 @@ def register(request):
 
 def gastos_list(request):
     gastos_o = gastos.objects.all()
-    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
+    ingresos_o = ingresos.objects.all()
+    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o, 'ingresos_o' :ingresos_o})
 
 
 def gastos_detail(request, pk):
@@ -57,7 +58,7 @@ def ingresos_list(request):
 
 
 def ingresos_detail(request, pk):
-    ingresos_a = get_object_or_404(Ingresos, pk=pk)
+    ingresos_a = get_object_or_404(ingresos, pk=pk)
     return render(request, 'aplicacion/ingresos_detail.html', {'ingresos_a': ingresos_a})
 
 
@@ -103,11 +104,11 @@ def filtro_tablas_ingresos():
 
     year = final_date.year
 
-    ingresos1 = Ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__range=[init_date_1, final_date]) #Tabla opción 1
-    ingresos2 = Ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__range=[init_date_2, final_date]) #Tabla opción 2
-    ingresos3 = Ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__range=[init_date_3, final_date]) #Tabla opción 3
-    ingresoanual = Ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__year__gte=year, fecha_ingreso__month__gte=1, fecha_ingreso__day__gte=1, 
-                fecha_ingreso__lte=final_date) # Tabla opción 4
+    ingresos1 = ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__range=[init_date_1, final_date]) #Tabla opción 1
+    ingresos2 = ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__range=[init_date_2, final_date]) #Tabla opción 2
+    ingresos3 = ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__range=[init_date_3, final_date]) #Tabla opción 3
+    ingresoanual = ingresos.objects.order_by('fecha_ingreso').filter(fecha_ingreso__year__gte=year, fecha_ingreso__month__gte=1, fecha_ingreso__day__gte=1,
+                                                                     fecha_ingreso__lte=final_date) # Tabla opción 4
     return (ingresos1, ingresos2, ingresos3, ingresoanual)
 
 def pie_chart_resumen():
@@ -146,10 +147,10 @@ def bar_chart_resumen():
         ###########################################################
         # Lo mismo pero para ingresos
         ###########################################################
-        ingresos =Ingresos.objects.filter(fecha_ingreso__year__gte=year, # Luego gastos se reemplazará por ingresos
-                                fecha_ingreso__month__gte=filter_month,
-                              fecha_ingreso__year__lte=year,
-                              fecha_ingreso__month__lte=filter_month) 
+        ingresos =ingresos.objects.filter(fecha_ingreso__year__gte=year,  # Luego gastos se reemplazará por ingresos
+                                          fecha_ingreso__month__gte=filter_month,
+                                          fecha_ingreso__year__lte=year,
+                                          fecha_ingreso__month__lte=filter_month)
         total2 = 0
         for i in range(len(ingresos)):
             total2+=ingresos[i].monto
@@ -169,12 +170,12 @@ def bar_chart_resumen():
         total+=gastos2[i].monto
     date_list.append(total)
     
-    ingresos =Ingresos.objects.filter(fecha_ingreso__year__gte=year, # Luego gastos se reemplazará por ingresos
-                                fecha_ingreso__month__gte=filter_month,
-                                fecha_ingreso__day__gte=1,
-                              fecha_ingreso__year__lte=year,
-                              fecha_ingreso__month__lte=filter_month,
-                              fecha_ingreso__day__lte = today) 
+    ingresos =ingresos.objects.filter(fecha_ingreso__year__gte=year,  # Luego gastos se reemplazará por ingresos
+                                      fecha_ingreso__month__gte=filter_month,
+                                      fecha_ingreso__day__gte=1,
+                                      fecha_ingreso__year__lte=year,
+                                      fecha_ingreso__month__lte=filter_month,
+                                      fecha_ingreso__day__lte = today)
     total2 = 0
     for i in range(len(ingresos)):
         total2+=ingresos[i].monto

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import gastos
-from .models import Ingresos
+from .models import ingresos
 
 admin.site.register(gastos)
 
-admin.site.register(Ingresos)
+admin.site.register(ingresos)
