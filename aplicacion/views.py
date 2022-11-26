@@ -14,11 +14,16 @@ from .forms import GastosForm, IngresosForm, RegisterForm
 
 # Create your views here.
 def register(request):
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            return redirect('calendario')
+
+
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('login_user')
         else:
             for msg in form.error_messages:
                 messages.error(request, form.error_messages[msg])    
@@ -29,19 +34,26 @@ def register(request):
 
 
 def login_user(request):
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            return redirect('calendario')
+
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            nombre_usuario = form.cleaned_data.get("username")
-            contraseña = form.cleaned_data.get("password")
-            usuario = authenticate(username=nombre_usuario, password=contraseña)
-            if usuario is not None:
-                login(request, usuario)
-                return redirect('calendario')
-            else:
-                messages.error(request, "usuario no válido")    
+        if request.user.is_authenticated:
+            return redirect('calendario')
         else:
-            messages.error(request, "información incorrecta")        
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                nombre_usuario = form.cleaned_data.get("username")
+                contraseña = form.cleaned_data.get("password")
+                usuario = authenticate(username=nombre_usuario, password=contraseña)
+                if usuario is not None:
+                    login(request, usuario)
+                    return redirect('calendario')
+                else:
+                    messages.error(request, "usuario no válido")    
+            else:
+                messages.error(request, "información incorrecta")        
 
     form = AuthenticationForm()
     return render(request, 'aplicacion/login.html', {'form':form})
@@ -53,15 +65,14 @@ def logout_user(request):
 
 
 def calendario(request):
-
     if request.user.is_authenticated:
+           
         gastos_o = gastos.objects.filter(id_usuario=request.user)
         ingresos_o = Ingresos.objects.filter(id_usuario=request.user)
+        
+        return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o, 'ingresos_o':ingresos_o})
     else:
-        gastos_o = gastos.objects.filter(id_usuario=None)
-        ingresos_o = Ingresos.objects.filter(id_usuario=None)
-    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o, 'ingresos_o':ingresos_o})
-
+        return redirect('index')
 def index(request):
     if request.user.is_authenticated:
         return redirect('calendario')
@@ -70,46 +81,55 @@ def index(request):
         return render(request, 'aplicacion/index.html', {})
 
 def gastos_detail(request, pk):
-    gastos_a = get_object_or_404(gastos, pk=pk)
-    return render(request, 'aplicacion/gastos_detail.html', {'gastos_a': gastos_a})
-
+    if request.user.is_authenticated:
+        gastos_a = get_object_or_404(gastos, pk=pk)
+        return render(request, 'aplicacion/gastos_detail.html', {'gastos_a': gastos_a})
+    else:
+        return redirect('index')
 
 def gastos_new(request):
-    form = GastosForm()
-    if request.method == "POST":
-        form = GastosForm(request.POST)
-        if form.is_valid():
-            gastos = form.save(commit=False)
-            gastos.id_usuario = request.user
-            gastos.save()
-            return redirect('gastos_detail', pk=gastos.pk)
-
-
-    else:
+    if request.user.is_authenticated:
         form = GastosForm()
-    return render(request, 'aplicacion/GastosForm.html', {'form': form})
+        if request.method == "POST":
+            form = GastosForm(request.POST)
+            if form.is_valid():
+                gastos = form.save(commit=False)
+                gastos.id_usuario = request.user
+                gastos.save()
+                return redirect('gastos_detail', pk=gastos.pk)
+        else:
+            form = GastosForm()
+        return render(request, 'aplicacion/GastosForm.html', {'form': form})
+    else:
+        return redirect('index')
+
 
 ###Ingresos### 
 
 def ingresos_detail(request, pk):
-    ingresos_a = get_object_or_404(Ingresos, pk=pk)
-    return render(request, 'aplicacion/ingresos_detail.html', {'ingresos_a': ingresos_a})
-
+    if request.user.is_authenticated:
+        ingresos_a = get_object_or_404(Ingresos, pk=pk)
+        return render(request, 'aplicacion/ingresos_detail.html', {'ingresos_a': ingresos_a})
+    else:
+        return redirect('index')
 
 def ingresos_new(request):
-    form = IngresosForm()
-    if request.method == "POST":
-        form = IngresosForm(request.POST)
-        if form.is_valid():
-            ingresos = form.save(commit=False)
-            ingresos.id_usuario = request.user
-            ingresos.save()
-            return redirect('ingresos_detail', pk=ingresos.pk)
-
-
-    else:
+    if request.user.is_authenticated:
         form = IngresosForm()
-    return render(request, 'aplicacion/IngresosForm.html', {'form': form})
+        if request.method == "POST":
+            form = IngresosForm(request.POST)
+            if form.is_valid():
+                ingresos = form.save(commit=False)
+                ingresos.id_usuario = request.user
+                ingresos.save()
+                return redirect('ingresos_detail', pk=ingresos.pk)
+
+
+        else:
+            form = IngresosForm()
+        return render(request, 'aplicacion/IngresosForm.html', {'form': form})
+    else:
+        return redirect('index')
 
 ################################################################
 # Resumen general
@@ -218,21 +238,20 @@ def bar_chart_resumen(gastos0, ingresos0):
     return (name_d_list, date_list, date_list_2)
 
 def resumen(request):
-    if request.method == 'GET':
-        gastos_o = gastos.objects.filter(id_usuario=None)
-        ingresos_o = Ingresos.objects.filter(id_usuario=None)
-        if request.user.is_authenticated:
+    if request.user.is_authenticated:
+        if request.method == 'GET':
             gastos_o = gastos.objects.filter(id_usuario=request.user)
             ingresos_o = Ingresos.objects.filter(id_usuario=request.user)
-        (gastos1, gastos2, gastos3, gastoanual) = filtro_tablas(gastos_o)
-        (ingresos1, ingresos2, ingresos3, ingresoanual) = filtro_tablas_ingresos(ingresos_o)
-        (cat_list, number_list) = pie_chart_resumen(gastos_o)
-        (name_d_list, date_list, date_list_2) = bar_chart_resumen(gastos_o, ingresos_o)
-        diccionario = {'gastos1' :gastos1, 'gastos2': gastos2, 'gastos3': gastos3, 'gastoanual': gastoanual,
-                        'ingresos1' :ingresos1, 'ingresos2': ingresos2, 'ingresos3': ingresos3, 'ingresoanual': ingresoanual, 
-                        'cat_list': cat_list, 'number_list': number_list, 
-                        'name_d_list': name_d_list, 'date_list': date_list, 'date_list_2': date_list_2}
-        return render(request, 'aplicacion/resumen_html/resumen.html', diccionario)
-
+            (gastos1, gastos2, gastos3, gastoanual) = filtro_tablas(gastos_o)
+            (ingresos1, ingresos2, ingresos3, ingresoanual) = filtro_tablas_ingresos(ingresos_o)
+            (cat_list, number_list) = pie_chart_resumen(gastos_o)
+            (name_d_list, date_list, date_list_2) = bar_chart_resumen(gastos_o, ingresos_o)
+            diccionario = {'gastos1' :gastos1, 'gastos2': gastos2, 'gastos3': gastos3, 'gastoanual': gastoanual,
+                            'ingresos1' :ingresos1, 'ingresos2': ingresos2, 'ingresos3': ingresos3, 'ingresoanual': ingresoanual, 
+                            'cat_list': cat_list, 'number_list': number_list, 
+                            'name_d_list': name_d_list, 'date_list': date_list, 'date_list_2': date_list_2}
+            return render(request, 'aplicacion/resumen_html/resumen.html', diccionario)
+    else:
+        return redirect('index')
 
 
