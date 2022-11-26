@@ -23,7 +23,6 @@
               var calendarEl = document.getElementById('calendar');
               var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                themeSystem: 'bootstrap5',
                 locale: 'es',
                 expandRows: true,
                 headerToolbar: {
@@ -47,6 +46,18 @@
     
                         },
                     {% endfor %}
+                    {% for ing in ingresos_o %}
+                        {
+                            id: '{{ ing.id_usuario}}',
+                            title: '{{ ing.titulo}}',
+                            description: '{{ing.descripcion}} \nMonto: ${{ing.monto}}',
+                            start: '{{ ing.fecha_ingreso | date:"Y-m-d" }}',
+                            setEnd: '{{ ing.fecha_ingreso | date:"Y-m-d" }}',
+
+
+                        },
+                    {% endfor %}
+
                 ],
                 eventClick: function(info) {
     	            alert('Evento: ' + info.event.title + '\n' + 'Descripcion: ' + info.event.extendedProps.description);
