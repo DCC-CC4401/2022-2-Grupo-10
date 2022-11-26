@@ -53,8 +53,14 @@ def logout_user(request):
 
 
 def calendario(request):
-    gastos_o = gastos.objects.all()
-    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
+
+    if request.user.is_authenticated:
+        gastos_o = gastos.objects.filter(id_usuario=request.user)
+        ingresos_o = Ingresos.objects.filter(id_usuario=request.user)
+    else:
+        gastos_o = gastos.objects.filter(id_usuario=None)
+        ingresos_o = Ingresos.objects.filter(id_usuario=None)
+    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o, 'ingresos_o':ingresos_o})
 
 def index(request):
     return render(request, 'aplicacion/index.html', {})
