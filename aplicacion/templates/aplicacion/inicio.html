@@ -43,8 +43,21 @@
                             description: '{{gast.descripcion}} \nMonto: ${{gast.monto}}',
                             start: '{{ gast.fecha_cobro | date:"Y-m-d" }}',
                             setEnd: '{{ gast.fecha_cobro | date:"Y-m-d" }}',
+                            backgroundColor: 'red',
+                            borderColor: 'red'
 
-    
+
+                        },
+                    {% endfor %}
+                    {% for ing in ingresos_o %}
+                        {
+                            id: '{{ ing.id_usuario}}',
+                            title: '{{ ing.titulo}}',
+                            description: '{{ing.descripcion}} \nMonto: ${{ing.monto}}',
+                            start: '{{ ing.fecha_ingreso | date:"Y-m-d" }}',
+                            setEnd: '{{ ing.fecha_ingreso | date:"Y-m-d" }}',
+
+
                         },
                     {% endfor %}
                 ],

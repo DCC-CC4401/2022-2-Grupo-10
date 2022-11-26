@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from datetime import timedelta
 from .models import Ingresos, gastos
 from django.db.models import Sum
@@ -25,9 +27,40 @@ def register(request):
 
     return render(request, 'aplicacion/registro.html', {'form':form})
 
+
+def login_user(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            nombre_usuario = form.cleaned_data.get("username")
+            contraseña = form.cleaned_data.get("password")
+            usuario = authenticate(username=nombre_usuario, password=contraseña)
+            if usuario is not None:
+                login(request, usuario)
+                return redirect('/')
+            else:
+                messages.error(request, "usuario no válido")    
+        else:
+            messages.error(request, "información incorrecta")        
+
+    form = AuthenticationForm()
+    return render(request, 'aplicacion/login.html', {'form':form})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
+
+
 def calendario(request):
-    gastos_o = gastos.objects.all()
-    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
+
+    if request.user.is_authenticated:
+        gastos_o = gastos.objects.filter(id_usuario=request.user)
+        ingresos_o = Ingresos.objects.filter(id_usuario=request.user)
+    else:
+        gastos_o = gastos.objects.filter(id_usuario=None)
+        ingresos_o = Ingresos.objects.filter(id_usuario=None)
+    return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o, 'ingresos_o':ingresos_o})
 
 def index(request):
     return render(request, 'aplicacion/index.html', {})
