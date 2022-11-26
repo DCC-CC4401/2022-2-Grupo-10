@@ -25,10 +25,12 @@ def register(request):
 
     return render(request, 'aplicacion/registro.html', {'form':form})
 
-def gastos_list(request):
+def calendario(request):
     gastos_o = gastos.objects.all()
     return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o})
 
+def index(request):
+    return render(request, 'aplicacion/index.html', {})
 
 def gastos_detail(request, pk):
     gastos_a = get_object_or_404(gastos, pk=pk)
@@ -50,11 +52,7 @@ def gastos_new(request):
         form = GastosForm()
     return render(request, 'aplicacion/GastosForm.html', {'form': form})
 
-###Ingresos###
-def ingresos_list(request):
-    ingresos_o = ingresos.objects.all()
-    return render(request, 'aplicacion/inicio.html', {'ingresos_o' :ingresos_o})
-
+###Ingresos### 
 
 def ingresos_detail(request, pk):
     ingresos_a = get_object_or_404(Ingresos, pk=pk)
