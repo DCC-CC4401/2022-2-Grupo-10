@@ -63,7 +63,11 @@ def calendario(request):
     return render(request, 'aplicacion/inicio.html', {'gastos_o' :gastos_o, 'ingresos_o':ingresos_o})
 
 def index(request):
-    return render(request, 'aplicacion/index.html', {})
+    if request.user.is_authenticated:
+        return redirect('calendario')
+
+    else:
+        return render(request, 'aplicacion/index.html', {})
 
 def gastos_detail(request, pk):
     gastos_a = get_object_or_404(gastos, pk=pk)
